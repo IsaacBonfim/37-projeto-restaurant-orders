@@ -53,7 +53,23 @@ class TrackOrders:
         return set(never_visited)
 
     def get_busiest_day(self):
-        pass
+        days = {}
+
+        for _, _, day in self.__orders:
+            if day in days:
+                days[day] += 1
+            else:
+                days[day] = 1
+
+        busiest = ""
+        clients_qnt = 0
+
+        for day, qnt in days.items():
+            if qnt > clients_qnt:
+                clients_qnt = qnt
+                busiest = day
+
+        return busiest
 
     def get_least_busy_day(self):
         pass
