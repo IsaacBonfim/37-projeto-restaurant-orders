@@ -1,3 +1,6 @@
+from .analyze_log import create_orders_lists, clients_info
+
+
 class TrackOrders:
     def __init__(self) -> None:
         self.__orders = []
@@ -9,7 +12,19 @@ class TrackOrders:
         self.__orders.append([customer, order, day])
 
     def get_most_ordered_dish_per_customer(self, customer):
-        pass
+        days, clients, products = create_orders_lists(self.__orders)
+        clients_set = clients_info(self.__orders, days, clients, products)
+
+        clients_orders = clients_set[customer]["orders"]
+        order_qnt = 0
+        ordered_prod = ""
+
+        for order, qnt in clients_orders.items():
+            if qnt > order_qnt:
+                order_qnt = qnt
+                ordered_prod = order
+
+        return ordered_prod
 
     def get_never_ordered_per_customer(self, customer):
         pass
