@@ -87,7 +87,7 @@ def analyze_log(path_to_file):
             most_ordered_maria = maria_info(orders['maria'])
             hamburguer_arnaldo = orders['arnaldo']['orders']['hamburguer']
             joao_never_ordered, joao_never_went = joao_info(orders['joao'])
-            
+
             save_info(
                 most_ordered_maria,
                 hamburguer_arnaldo,
