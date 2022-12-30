@@ -40,7 +40,17 @@ class TrackOrders:
         return set(never_ordered)
 
     def get_days_never_visited_per_customer(self, customer):
-        pass
+        days, clients, products = create_orders_lists(self.__orders)
+        clients_set = clients_info(self.__orders, days, clients, products)
+
+        clients_days = clients_set[customer]["days"]
+        never_visited = []
+
+        for order, qnt in clients_days.items():
+            if not qnt:
+                never_visited.append(order)
+
+        return set(never_visited)
 
     def get_busiest_day(self):
         pass
