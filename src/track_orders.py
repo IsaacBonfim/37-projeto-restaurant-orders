@@ -27,7 +27,17 @@ class TrackOrders:
         return ordered_prod
 
     def get_never_ordered_per_customer(self, customer):
-        pass
+        days, clients, products = create_orders_lists(self.__orders)
+        clients_set = clients_info(self.__orders, days, clients, products)
+
+        clients_orders = clients_set[customer]["orders"]
+        never_ordered = []
+
+        for order, qnt in clients_orders.items():
+            if not qnt:
+                never_ordered.append(order)
+
+        return set(never_ordered)
 
     def get_days_never_visited_per_customer(self, customer):
         pass
